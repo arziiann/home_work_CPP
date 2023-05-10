@@ -1,6 +1,8 @@
 #include <iostream>
 #include <tuple>
 
+//Իրականացնել զանգված, որտեղ կպահպանվեն տարատեսակ տիպերի արժեքներ
+
 
 int main()
 {
@@ -11,18 +13,18 @@ int main()
 	
 
 	int int_value = 10;
-	float  float_value = 89.7;
-	char  char_value = 'A';
-	bool  bool_value = false;
+	float float_value = 89.7;
+	char char_value = 'A';
+	bool bool_value = false;
 
 	void* array[array_size] = { &int_value, &float_value, &char_value, &bool_value };
 	
 
 	
-	int * int_ptr = static_cast<int*>(array[0]);
-	float * float_ptr = static_cast<float*>(array[1]);
-	char * char_ptr = static_cast<char*>(array[2]);
-	bool * bool_ptr = static_cast<bool*>(array[3]);
+	int* int_ptr = static_cast<int*>(array[0]);
+	float* float_ptr = static_cast<float*>(array[1]);
+	char* char_ptr = static_cast<char*>(array[2]);
+	bool* bool_ptr = static_cast<bool*>(array[3]);
 	
 	std::cout << *int_ptr  <<  std::endl;
 	std::cout << *float_ptr << std::endl;
