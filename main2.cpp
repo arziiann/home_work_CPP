@@ -1,6 +1,6 @@
 #include <iostream>
 
-int num_cout_sum(int number);
+int num_avg(int number);
 
 
 int main()
@@ -11,17 +11,17 @@ int main()
 	if(num < 0)
 	{
 		num = num * (-1);
-		std::cout << num_cout_sum(num);
+		std::cout << num_avg(num);
 	}
 	else
 	{
-		std::cout << num_cout_sum(num);
+		std::cout << num_avg(num);
 	}
 
 	return 0;
 }
 
-int num_cout_sum(int number)
+int num_avg(int number)
 {
 	int count = 1;
 	int sum = 0;
