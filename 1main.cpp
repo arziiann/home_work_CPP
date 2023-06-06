@@ -1,0 +1,21 @@
+#include <iostream>
+
+
+int main()
+{
+	int num = 8;
+	char * ptr = reinterpret_cast<char*>(&num);
+	
+
+	for(int i = 0; i < sizeof(int); ++i)
+	{
+		std::cout <<  "\nbyte: " << i << "-->" << static_cast<int>(*(ptr + i));
+    }
+
+	
+	
+
+
+
+
+}
