@@ -6,6 +6,23 @@ const int WHITE = 0;
 const int BLACK = 1;
 
 std::string board[board_size][board_size];
+bool is_valid_knight_move(std::string board[][board_size], int from_row, int from_col, int to_row, int to_col)
+{
+    if (to_row < 0 || to_row >= board_size || to_col < 0 || to_col >= board_size)
+    {
+        return false;
+    }
+
+    int row_diff = abs(to_row - from_row);
+    int col_diff = abs(to_col - from_col);
+
+    if ((row_diff == 2 && col_diff == 1) || (row_diff == 1 && col_diff == 2))
+    {
+        return true;
+    }
+
+    return false;
+}
 
 bool is_valid_bishop_move(std::string board[][board_size], int from_row, int from_col, int to_row, int to_col)
 {
@@ -22,7 +39,7 @@ bool is_valid_bishop_move(std::string board[][board_size], int from_row, int fro
         int row_dir = (to_row > from_row) ? 1 : -1;
         int col_dir = (to_col > from_col) ? 1 : -1;
 
-        for (int i = 1; i < row_diff; i++)
+        for (int i = 1; i < row_diff; ++i)
         {
             int row = from_row + i * row_dir;
             int col = from_col + i * col_dir;
@@ -73,13 +90,22 @@ bool is_valid_queen_move(std::string board[][board_size], int from_row, int from
         return false;
     }
 
-    if (is_valid_rook_move(board, from_row, from_col, to_row, to_col) ||is_valid_bishop_move(board, from_row, from_col, to_row, to_col))
+    if (is_valid_rook_move(board, from_row, from_col, to_row, to_col) || is_valid_bishop_move(board, from_row, from_col, to_row, to_col))
+    {
+        return true;
+    }
+    
+    if ((from_row == 0 && from_col == 0 && to_row == board_size - 1 && to_col == board_size - 1) ||
+        (from_row == 0 && from_col == board_size - 1 && to_row == board_size - 1 && to_col == 0) ||
+        (from_row == board_size - 1 && from_col == 0 && to_row == 0 && to_col == board_size - 1) ||
+        (from_row == board_size - 1 && from_col == board_size - 1 && to_row == 0 && to_col == 0))
     {
         return true;
     }
 
     return false;
 }
+
 
 bool is_valid_king_move(std::string board[][board_size], int from_row, int from_col, int to_row, int to_col)
 {
@@ -184,11 +210,21 @@ int main()
 
             player = (player == 0) ? 1 : 0;
         }
+        else if (is_valid_knight_move(board, from_row, from_col, to_row, to_col))
+        {
+            board[to_row][to_col] = board[from_row][from_col];
+            board[from_row][from_col] = "";
+            display_board(board);
+            player = (player == 0) ? 1 : 0;
+        }
+
         else
         {
             std::cout << "Invalid move!" << std::endl;
         }
+        
     }
+
 
     return 0;
 }
